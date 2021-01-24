@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/pages/App';
-import firebaseConfig from './config/firebaseConfig';
 import reportWebVitals from './reportWebVitals';
-
-console.log('firebase config : ', firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
