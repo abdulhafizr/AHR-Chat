@@ -19,7 +19,7 @@ const Signup = () => {
                                 <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
                                     <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
 
-                                    <Form onSubmit={({value}) => {console.log(size)}}>
+                                    <Form onSubmit={({value}) => {console.log(value)}}>
                                         
                                         <FormField name='name' htmlFor='name-id' label='Name'>
                                             <TextInput id='name-id' name='name' placeholder='Name' size='small' />
@@ -53,7 +53,7 @@ const Signup = () => {
                                 <Box width='medium' style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
                                     <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
 
-                                    <Form onSubmit={({value}) => {console.log(size)}}>
+                                    <Form onSubmit={({value}) => {console.log(value)}}>
                                         
                                         <FormField name='name' htmlFor='name-id' label='Name'>
                                             <TextInput id='name-id' name='name' placeholder='Name' size='small' />
