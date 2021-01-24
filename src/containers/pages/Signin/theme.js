@@ -4,9 +4,9 @@ const theme = {
         // brand: '#051923'
         },
         font: {
-        family: 'Roboto',
-        size: '18px',
-        height: '20px',
+            family: 'Roboto',
+            size: '18px',
+            height: '20px',
         },
     },
     icon: {
