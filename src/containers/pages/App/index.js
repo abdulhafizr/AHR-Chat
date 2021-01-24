@@ -1,8 +1,8 @@
-import MainApp from '../MainApp';
+import Router from '../../../config/router';
 
 const App = () => {
   return (
-    <MainApp />
+    <Router />
   )
 }
 
