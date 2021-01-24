@@ -11,7 +11,8 @@ const theme = {
     },
     icon: {
         size: {
-            small: '18px'
+            small: '18px',
+            sMedidum: '25px'
         }
     }
 }

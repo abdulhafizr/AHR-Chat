@@ -1,4 +1,4 @@
-import { Box, Button } from 'grommet';
+import { Box, Menu } from 'grommet';
 import { AppBar } from '../../../components';
 import { MoreVertical } from 'grommet-icons';
 
@@ -7,12 +7,16 @@ const ChatBody = ({ showDetailContact }) => {
         <Box flex align='center'>
             <AppBar>
             <Box />
-            <Button 
-                size='small' 
-                padding='none' 
-                icon={<MoreVertical size='small' />} 
-                onClick={() => setShowDetailContact(!showDetailContact)}
-            ></Button>
+            <Menu 
+                icon={<MoreVertical size='small' />}
+                items={[
+                    { label: 'Info Contact', onClick: () => {} },
+                    { label: 'Delete Message', onClick: () => {} },
+                    { label: 'Logout', onClick: () => {} },
+                    ]}
+                dropBackground='brand'
+                size='large'
+            />
             </AppBar>
 
             <Box flex justify='center' align='center'>
