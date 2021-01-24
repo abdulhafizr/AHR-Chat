@@ -16,10 +16,10 @@ const Web = () => {
 
                 <Form onSubmit={({value}) => {console.log(value)}}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
-                        <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' />
+                        <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
                     <FormField name='password' htmlFor='password-id' label='Password'>
-                        <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' />
+                        <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' required />
                     </FormField>
                     
                     <Box direction='row' gap='small'>

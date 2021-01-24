@@ -7,7 +7,8 @@ const Signin = () => {
         <Grommet theme={theme} full>
             <ResponsiveContext.Consumer>
                 {  (size) => (
-                        (size === 'medium' || size === 'large') ? (
+                        (size === 'medium' || size === 'large') ? 
+                        (
                             <Web />
                         ) :
                         (

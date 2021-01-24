@@ -1,7 +1,7 @@
 import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
 import { Link } from "react-router-dom";
 
-const Mobile = () => {
+const Mobile = ({ signupUser }) => {
     return (
         <Box flex fill
             align='center' 
@@ -12,16 +12,16 @@ const Mobile = () => {
             <Box width='medium' style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
                 <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
 
-                <Form onSubmit={({value}) => {console.log(value)}}>
+                <Form onSubmit={({value}) => signupUser(value)}>
                     
                     <FormField name='name' htmlFor='name-id' label='Name'>
-                        <TextInput id='name-id' name='name' placeholder='Name' size='small' />
+                        <TextInput id='name-id' name='name' placeholder='Name' size='small' required />
                     </FormField>
                     <FormField name='email' htmlFor='email-id' label='Email'>
-                        <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' />
+                        <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
                     <FormField name='password' htmlFor='password-id' label='Password'>
-                        <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' />
+                        <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' required />
                     </FormField>
                     
                     <Box direction='row' justify='center' gap='medium'>

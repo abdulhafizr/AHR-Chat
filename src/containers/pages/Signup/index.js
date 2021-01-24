@@ -7,17 +7,23 @@ const Signup = () => {
         <Grommet theme={theme} full>
             <ResponsiveContext.Consumer>
                 {  (size) => (
-                        (size === 'medium' || size === 'large') ? (
-                            <Web />
+                        (size === 'medium' || size === 'large') ? 
+                        (
+                            <Web signupUser={(value) => signupUser(value)} />
                         ) :
                         (
-                            <Mobile />
+                            <Mobile signupUser={(value) => signupUser(value)} />
                         )
                     )
                 }
             </ResponsiveContext.Consumer>
         </Grommet>
     )
+}
+
+
+const signupUser = (value) => {
+    console.log(value);
 }
 
 export default Signup;
