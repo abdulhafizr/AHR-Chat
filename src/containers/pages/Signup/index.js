@@ -1,5 +1,6 @@
 import { Grommet, ResponsiveContext } from 'grommet';
 import { Mobile, Web } from '../../../components/molecules/SignupForm';
+import signupUser from '../../../config/signupUser';
 import theme from './theme';
 
 const Signup = () => {
@@ -19,11 +20,6 @@ const Signup = () => {
             </ResponsiveContext.Consumer>
         </Grommet>
     )
-}
-
-
-const signupUser = (value) => {
-    console.log(value);
 }
 
 export default Signup;

@@ -16,9 +16,9 @@ const Web = ({ signupUser }) => {
 
                 <Form onSubmit={({value}) => signupUser(value)}>
                     
-                    <FormField name='name' htmlFor='name-id' label='Name'>
+                    {/* <FormField name='name' htmlFor='name-id' label='Name'>
                         <TextInput id='name-id' name='name' placeholder='Name' size='small' required />
-                    </FormField>
+                    </FormField> */}
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
