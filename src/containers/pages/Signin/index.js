@@ -1,29 +1,28 @@
 import { Grommet, ResponsiveContext } from 'grommet';
 import { Mobile, Web } from '../../../components/molecules/SigninForm';
-import { connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import { store } from '../../../config/redux';
 import theme from './theme';
 
 const Signin = (props) => {
     return (
-        <Grommet theme={theme} full>
-            <ResponsiveContext.Consumer>
-                {  (size) => (
-                        (size === 'medium' || size === 'large') ? 
-                        (
-                            <Web />
-                        ) :
-                        (
-                            <Mobile />
+        <Provider store={store}>
+            <Grommet theme={theme} full>
+                <ResponsiveContext.Consumer>
+                    {  (size) => (
+                            (size === 'medium' || size === 'large') ? 
+                            (
+                                <Web />
+                            ) :
+                            (
+                                <Mobile />
+                            )
                         )
-                    )
-                }
-            </ResponsiveContext.Consumer>
-        </Grommet>
+                    }
+                </ResponsiveContext.Consumer>
+            </Grommet>
+        </Provider>
     )
 }
 
-const dispatchStateToProps = (state) => ({
-    isValidationError: state.isValidationError
-})
-
-export default connect(dispatchStateToProps, null) (Signin);
+export default Signin;

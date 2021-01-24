@@ -1,7 +1,8 @@
 import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-const Web = () => {
+const Web = (props) => {
     return (
         <Box flex fill
             align='center' 
@@ -12,9 +13,9 @@ const Web = () => {
             <Box width='large' />
             
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN</Heading>
+                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN {props.user}</Heading>
 
-                <Form onSubmit={({value}) => {console.log(value)}}>
+                <Form onSubmit={({value}) => null}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
@@ -24,16 +25,32 @@ const Web = () => {
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
+                        <Button color='white' label='Change User' onClick={props.changeUser} />
                         <Button color='white' primary type='submit' label='Signin' />
                     </Box>
                     <Box margin={{top: '6px'}}>
                         <Text margin='xsmall' size='xsmall'>Dont have an account? <Link to='/signup'>Signup</Link></Text>
                     </Box>
                 </Form>
-
             </Box>
         </Box>
     )
 }
 
-export default Web;
+const reduxState = (state) => ({
+    isValidationError: state.isValidationError,
+    user: state.user
+})
+
+const asyncChangeUser = () => (dispatch) => {
+    setTimeout(() => {
+        return dispatch({type: 'changeUser'});
+    }, 2000)
+}
+
+const reduxDispatch = (dispatch) => ({
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),
+    changeUser: () => dispatch(asyncChangeUser())
+})
+
+export default connect(reduxState, reduxDispatch) (Web);

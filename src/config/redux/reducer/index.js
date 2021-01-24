@@ -1,5 +1,6 @@
 const initState = {
-    isValidationError: false
+    isValidationError: false,
+    user: 'Abdul'
 }
 
 const reducer = (state = initState, action) => {
@@ -7,6 +8,12 @@ const reducer = (state = initState, action) => {
         return {
             ...state,
             isValidationError: !state.isValidationError
+        }
+    }
+    if(action.type === 'changeUser') {
+        return {
+            ...state,
+            user: 'Abdul Hafiz Ramadan'
         }
     }
     return state;
