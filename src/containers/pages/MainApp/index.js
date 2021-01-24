@@ -15,13 +15,13 @@ const MainApp = () => {
               <Box flex direction='row' overflow={{ horizontal: 'hidden' }}>
                 {
                   showSetting && (
-                    <Settings />
+                    <Settings size={size} setShowSetting={(value) => setShowSetting(value)} show={showSetting} />
                   )
                 }
                 
                 {
                   (!showSetting) && (
-                    <Contacts />
+                    <Contacts size={size} setShowSetting={(value) => setShowSetting(value)} show={showSetting} />
                   )
                 }
                   
@@ -32,12 +32,12 @@ const MainApp = () => {
                 }
                 
                 {
-                  (!showDetailContact || size !== 'small') ? 
-                    (
-                      <DetailContactWeb />
-                    ) : (
-                      <DetailContactAndroid /> 
-                    )
+                !showDetailContact || size !== 'small' ? 
+                  (
+                    <DetailContactWeb />
+                  ) : (
+                    <DetailContactAndroid /> 
+                  )
                 }
               </Box>
 

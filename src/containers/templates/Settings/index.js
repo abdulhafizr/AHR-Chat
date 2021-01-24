@@ -1,8 +1,15 @@
+import React, { useState } from 'react';
 import { Box, Button, Heading } from 'grommet';
 import { AppBar } from '../../../components';
 import { MoreVertical } from 'grommet-icons';
 
-const Settings = ({ showSetting, size }) => {
+const Settings = ({ setShowSetting, size, show }) => {
+    const [isShow, setIsShow] = useState(show);
+    const setSettingsDisplay = () => {
+        setIsShow(!isShow);
+        return isShow;
+    }
+
     return (
         <Box
             width={size === 'small' ? 'full' : 'medium'}
@@ -15,7 +22,7 @@ const Settings = ({ showSetting, size }) => {
                 size='small' 
                 padding='none' 
                 icon={<MoreVertical size='small' />} 
-                onClick={() => setShowSetting(!showSetting)}
+                onClick={() => setShowSetting(setSettingsDisplay())}
             ></Button>
             </AppBar>
 
@@ -24,10 +31,6 @@ const Settings = ({ showSetting, size }) => {
             </Box>
         </Box>
     )
-}
-
-const setShowSetting = (showSetting) => {
-    return !showSetting;
 }
 
 export default Settings;
