@@ -1,5 +1,6 @@
 import { Grommet, ResponsiveContext } from 'grommet';
 import { Mobile, Web } from '../../../components/molecules/SignupForm';
+import { connect } from 'react-redux';
 import signupUser from '../../../config/signupUser';
 import theme from './theme';
 
@@ -22,4 +23,8 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+const dispatchStateToProps = (state) => ({
+    isValidationError: state.isValidationError
+})
+
+export default connect(dispatchStateToProps, null) (Signup);

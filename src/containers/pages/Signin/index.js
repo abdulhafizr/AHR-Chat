@@ -1,8 +1,9 @@
 import { Grommet, ResponsiveContext } from 'grommet';
 import { Mobile, Web } from '../../../components/molecules/SigninForm';
+import { connect } from 'react-redux';
 import theme from './theme';
 
-const Signin = () => {
+const Signin = (props) => {
     return (
         <Grommet theme={theme} full>
             <ResponsiveContext.Consumer>
@@ -21,4 +22,8 @@ const Signin = () => {
     )
 }
 
-export default Signin;
+const dispatchStateToProps = (state) => ({
+    isValidationError: state.isValidationError
+})
+
+export default connect(dispatchStateToProps, null) (Signin);
