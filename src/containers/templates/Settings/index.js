@@ -1,29 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, Heading } from 'grommet';
+import { connect } from 'react-redux';
 import { AppBar } from '../../../components';
-import { MoreVertical } from 'grommet-icons';
+import { FormClose } from 'grommet-icons';
 
-const Settings = ({ setShowSetting, size, show }) => {
-    const [isShow, setIsShow] = useState(show);
-    const setSettingsDisplay = () => {
-        setIsShow(!isShow);
-        return isShow;
-    }
-
+const Settings = ({ size, toggleIsSettingShow }) => {
     return (
         <Box
             width={size === 'small' ? 'full' : 'medium'}
             background='light-2'
             align='center'
         >
-            <AppBar>
-            <Heading level='4' margin='none'>Setting</Heading>
-            <Button 
-                size='small' 
-                padding='none' 
-                icon={<MoreVertical size='small' />} 
-                onClick={() => setShowSetting(setSettingsDisplay())}
-            ></Button>
+            <AppBar style={{paddingTop: '15px', paddingBottom: '15px'}}>
+                <Button 
+                    size='small' 
+                    padding='none' 
+                    icon={<FormClose size='small' />} 
+                    onClick={toggleIsSettingShow}
+                ></Button>
+                <Heading level='5' style={{fontWeight: 'normal'}} margin='none'>Setting</Heading>
             </AppBar>
 
             <Box flex justify='center'>
@@ -33,4 +28,8 @@ const Settings = ({ setShowSetting, size, show }) => {
     )
 }
 
-export default Settings;
+const reduxDispatch = (dispatch) => ({
+    toggleIsSettingShow: () => dispatch({type: 'toggleIsSettingShow'})
+})
+
+export default connect(null, reduxDispatch) (Settings);

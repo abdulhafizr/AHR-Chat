@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Avatar, Box, Menu } from 'grommet';
 import { AppBar } from '../../../components';
 import { MoreVertical } from 'grommet-icons';
+import { connect } from 'react-redux';
 
-const Contacts = ({ setShowSetting, size, show }) => {
-    const [isShow, setIsShow] = useState(show)
-    const setContactDisplay = () => {
-        setIsShow(!isShow);
-        return isShow;
-    }
-
+const Contacts = ({ toggleIsSettingShow, size }) => {
     return (
         <Box
             width={size === 'small' ? 'full' : 'medium'}
@@ -27,7 +22,7 @@ const Contacts = ({ setShowSetting, size, show }) => {
                     icon={<MoreVertical size='small' />}
                     items={[
                         { label: 'Profile', onClick: () => {} },
-                        { label: 'Setting', onClick: () => {} },
+                        { label: 'Setting', onClick: toggleIsSettingShow },
                         { label: 'Logout', onClick: () => {} },
                       ]}
                     dropBackground='brand'
@@ -41,4 +36,8 @@ const Contacts = ({ setShowSetting, size, show }) => {
     )
 }
 
-export default Contacts;
+const reduxDispatch = (dispatch) => ({
+    toggleIsSettingShow: () => dispatch({type: 'toggleIsSettingShow'})
+})
+
+export default connect(null, reduxDispatch) (Contacts);

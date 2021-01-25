@@ -1,86 +1,27 @@
-import { Button, Grommet, Box, ResponsiveContext, Heading, Form, FormField, TextInput, Text } from 'grommet';
-import { Link } from 'react-router-dom';
+import { Grommet, ResponsiveContext } from 'grommet';
+import { Mobile, Web } from '../../../components/molecules/SignupForm';
+import { Provider } from 'react-redux';
+import { store } from '../../../config/redux';
 import theme from './theme';
 
 const Signup = () => {
     return (
-        <Grommet theme={theme} full>
-            <ResponsiveContext.Consumer>
-                {  (size) => (
-                        (size === 'medium' || size === 'large') ? (
-                            <Box flex fill
-                                align='center' 
-                                direction='row' 
-                                background='url(https://images.unsplash.com/photo-1520410973988-f551cf36c60d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)' 
-                                justify='around'
-                            >
-                                <Box width='large' />
-                                
-                                <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                                    <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
-
-                                    <Form onSubmit={({value}) => {console.log(value)}}>
-                                        
-                                        <FormField name='name' htmlFor='name-id' label='Name'>
-                                            <TextInput id='name-id' name='name' placeholder='Name' size='small' />
-                                        </FormField>
-                                        <FormField name='email' htmlFor='email-id' label='Email'>
-                                            <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' />
-                                        </FormField>
-                                        <FormField name='password' htmlFor='password-id' label='Password'>
-                                            <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' />
-                                        </FormField>
-                                        
-                                        <Box direction='row' gap='small'>
-                                            <Button type='reset' color='white' label='Reset' />
-                                            <Button color='white' primary type='submit' label='Signup' />
-                                        </Box>
-                                        <Box margin={{top: '6px'}}>
-                                            <Text margin='xsmall' size='xsmall'>Already have an account? <Link to='/signin'>Signin</Link></Text>
-                                        </Box>
-                                    </Form>
-
-                                </Box>
-                            </Box>
-                        ) :
-                        (
-                            <Box flex fill
-                                align='center' 
-                                direction='row' 
-                                background='url(https://images.unsplash.com/photo-1520410973988-f551cf36c60d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)' 
-                                justify='center'
-                            >   
-                                <Box width='medium' style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                                    <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
-
-                                    <Form onSubmit={({value}) => {console.log(value)}}>
-                                        
-                                        <FormField name='name' htmlFor='name-id' label='Name'>
-                                            <TextInput id='name-id' name='name' placeholder='Name' size='small' />
-                                        </FormField>
-                                        <FormField name='email' htmlFor='email-id' label='Email'>
-                                            <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' />
-                                        </FormField>
-                                        <FormField name='password' htmlFor='password-id' label='Password'>
-                                            <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' />
-                                        </FormField>
-                                        
-                                        <Box direction='row' justify='center' gap='medium'>
-                                            <Button type='reset' color='white' label='Reset' />
-                                            <Button color='white' primary type='submit' label='Signup' />
-                                        </Box>
-                                        <Box margin={{top: '6px'}}>
-                                            <Text margin='xsmall' size='xsmall'>Already have an account? <Link to='/signin'><Text>Sign</Text></Link></Text>
-                                        </Box>
-                                    </Form>
-
-                                </Box>
-                            </Box>
+        <Provider store={store}>
+            <Grommet theme={theme} full>
+                <ResponsiveContext.Consumer>
+                    {  (size) => (
+                            (size === 'medium' || size === 'large') ? 
+                            (
+                                <Web />
+                            ) :
+                            (
+                                <Mobile />
+                            )
                         )
-                    )
-                }
-            </ResponsiveContext.Consumer>
-        </Grommet>
+                    }
+                </ResponsiveContext.Consumer>
+            </Grommet>
+        </Provider>
     )
 }
 

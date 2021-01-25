@@ -1,32 +1,35 @@
 import { Box, Button, Layer } from "grommet";
 import { AppBar } from "../../../components";
 import { FormClose } from 'grommet-icons';
+import { connect } from 'react-redux';
 
-const DetailContactAndroid = ({ showDetailContact }) => {
+const DetailContactAndroid = ({ toggleIsDetailShow, size }) => {
     return (
-        <Layer>
-            <Box
-                fill
-                background='light-2'
-            >
-            <AppBar>
-                <Button 
-                    size='small' 
-                    padding='none' 
-                    icon={<FormClose size='medium' />} 
-                    onClick={() => setShowDetailContact(!showDetailContact)}
-                ></Button>
-            </AppBar>
-                <Box flex justify='center' align='center'>
-                    Detail
+        (toggleIsDetailShow && size === 'small') && (
+            <Layer>
+                <Box
+                    fill
+                    background='light-2'
+                >
+                <AppBar>
+                    <Button 
+                        size='small' 
+                        padding='none' 
+                        icon={<FormClose size='medium' />} 
+                        onClick={toggleIsDetailShow}
+                    ></Button>
+                </AppBar>
+                    <Box flex justify='center' align='center'>
+                        Detail
+                    </Box>
                 </Box>
-            </Box>
-        </Layer>
+            </Layer>
+        )
     )
 }
 
-const setShowDetailContact = (setShowDetailContact) => {
-    return !setShowDetailContact;
-}
+const reduxDispatch = (dispatch) => ({
+    toggleIsDetailShow: () => dispatch({type: 'toggleIsDetailShow'})
+})
 
-export default DetailContactAndroid;
+export default connect(null, reduxDispatch) (DetailContactAndroid);

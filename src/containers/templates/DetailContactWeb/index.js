@@ -1,10 +1,11 @@
 import { Box, Button, Collapsible } from 'grommet';
 import { AppBar } from '../../../components';
 import { FormClose } from 'grommet-icons';
+import { connect } from 'react-redux';
 
-const DetailContactWeb = ({ showDetailContact }) => {
+const DetailContactWeb = ({ isDetailShow, toggleIsDetailShow, size }) => {
     return (
-        <Collapsible direction='horizontal' open={showDetailContact}>
+        <Collapsible direction='horizontal' open={(isDetailShow && size !== 'small')}>
             <Box
                 flex
                 width='medium'
@@ -16,7 +17,7 @@ const DetailContactWeb = ({ showDetailContact }) => {
                     size='small' 
                     padding='none' 
                     icon={<FormClose size='small' />} 
-                    onClick={() => setShowDetailContact(!showDetailContact)}
+                    onClick={toggleIsDetailShow}
                 ></Button>
             </AppBar>
                 <Box flex justify='center'>
@@ -27,8 +28,12 @@ const DetailContactWeb = ({ showDetailContact }) => {
     )
 }
 
-const setShowDetailContact = (setShowDetailContact) => {
-    return !setShowDetailContact;
-}
+const reduxState = (state) => ({
+    isDetailShow: state.isDetailShow
+})
+const reduxDispatch = (dispatch) => ({
+    toggleIsDetailShow: () => dispatch({type: 'toggleIsDetailShow'})
+})
 
-export default DetailContactWeb;
+
+export default connect(reduxState, reduxDispatch) (DetailContactWeb);
