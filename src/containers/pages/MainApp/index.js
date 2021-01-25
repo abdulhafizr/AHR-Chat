@@ -1,52 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChatBody, Contacts, DetailContactAndroid, DetailContactWeb, Settings } from '../../templates';
+import { Provider } from 'react-redux';
+import { store } from '../../../config/redux';
 import { Box, Grommet, ResponsiveContext } from "grommet";
+import { connect } from 'react-redux';
 import theme from './theme';
 
-const MainApp = () => {
-  const [showDetailContact, setShowDetailContact] = useState(false);
-  const [showSetting, setShowSetting] = useState(false);
+const MainApp = ({ isSettingShow, isDetailShow }) => {
   return (
-    <Grommet theme={theme} full>
-      <ResponsiveContext.Consumer>
-        { (size) => (
-            <Box fill>
+    <Provider store={store}>
+      <Grommet theme={theme} full>
+        <ResponsiveContext.Consumer>
+          { (size) => (
+              <Box fill>
 
-              <Box flex direction='row' overflow={{ horizontal: 'hidden' }}>
-                {
-                  showSetting && (
-                    <Settings size={size} setShowSetting={(value) => setShowSetting(value)} show={showSetting} />
-                  )
-                }
-                
-                {
-                  (!showSetting) && (
-                    <Contacts size={size} setShowSetting={(value) => setShowSetting(value)} show={showSetting} />
-                  )
-                }
+                <Box flex direction='row' overflow={{ horizontal: 'hidden' }}>
+                  {
+                    isSettingShow && 
+                    (
+                      <Settings size={size} />
+                    )
+                  }
                   
-                {
-                  size !== 'small' && (
-                    <ChatBody />
-                  )
-                }
-                
-                {
-                !showDetailContact || size !== 'small' ? 
-                  (
-                    <DetailContactWeb />
-                  ) : (
-                    <DetailContactAndroid /> 
-                  )
-                }
-              </Box>
+                  {
+                    (!isSettingShow) && 
+                    (
+                      <Contacts size={size} />
+                    )
+                  }
+                    
+                  {
+                    size !== 'small' && (
+                      <ChatBody />
+                    )
+                  }
+                  
+                  {
+                    isDetailShow && 
+                    (
+                      size !== 'small' ? 
+                      (
+                        <DetailContactWeb />
+                      ) :
+                      (
+                        <DetailContactAndroid /> 
+                      )
+                    )
+                  }
 
-            </Box>
-          )
-        }
-      </ResponsiveContext.Consumer>
-    </Grommet>
+                </Box>
+
+              </Box>
+            )
+          }
+        </ResponsiveContext.Consumer>
+      </Grommet>
+    </Provider>
   );
 }
 
-export default MainApp;
+const reduxState = (state) => ({
+  isSettingShow: state.isSettingShow,
+  isDetailShow: state.isDetailShow,
+})
+
+export default connect(reduxState, null) (MainApp);

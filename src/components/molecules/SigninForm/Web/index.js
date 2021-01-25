@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 const Web = (props) => {
+    console.log(props.isValidationError)
     return (
         <Box flex fill
             align='center' 
@@ -15,7 +16,7 @@ const Web = (props) => {
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
                 <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN {props.user}</Heading>
 
-                <Form onSubmit={({value}) => null}>
+                <Form onSubmit={({value}) => console.log(value)}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
@@ -25,7 +26,7 @@ const Web = (props) => {
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
-                        <Button color='white' label='Change User' onClick={props.changeUser} />
+                        <Button color='white' label='Change User' onClick={props.toggleIsValidationError} />
                         <Button color='white' primary type='submit' label='Signin' />
                     </Box>
                     <Box margin={{top: '6px'}}>

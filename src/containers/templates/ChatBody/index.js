@@ -1,8 +1,9 @@
 import { Box, Menu } from 'grommet';
 import { AppBar } from '../../../components';
 import { MoreVertical } from 'grommet-icons';
+import { connect } from 'react-redux';
 
-const ChatBody = ({ showDetailContact }) => {
+const ChatBody = ({ toggleIsDetailShow }) => {
     return (
         <Box flex align='center'>
             <AppBar>
@@ -10,8 +11,8 @@ const ChatBody = ({ showDetailContact }) => {
             <Menu 
                 icon={<MoreVertical size='small' />}
                 items={[
-                    { label: 'Info Contact', onClick: () => {} },
-                    { label: 'Delete Message', onClick: () => {} },
+                    { label: 'Info Contact', onClick: toggleIsDetailShow },
+                    { label: 'Delete Message', onClick: () => {alert('Cokk')} },
                     { label: 'Logout', onClick: () => {} },
                     ]}
                 dropBackground='brand'
@@ -26,8 +27,8 @@ const ChatBody = ({ showDetailContact }) => {
     )
 }
 
-const setShowDetailContact = (showDetailContact) => {
-    return !showDetailContact;
-}
+const reduxDispatch = (dispatch) => ({
+    toggleIsDetailShow: () => dispatch({type: 'toggleIsDetailShow'})
+})
 
-export default ChatBody;
+export default connect(null, reduxDispatch) (ChatBody);
