@@ -9,8 +9,8 @@ const Mobile = () => {
             background='url(https://images.unsplash.com/photo-1520410973988-f551cf36c60d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)' 
             justify='center'
         >   
-            <Box width='medium' style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN</Heading>
+            <Box width='medium' style={{borderRadius: '6px'}} pad='small' margin={{horizontal: '15px'}} background='brand' elevation='small'>
+                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNIN</Heading>
 
                 <Form onSubmit={({value}) => {console.log(value)}}>
                     
@@ -21,7 +21,7 @@ const Mobile = () => {
                         <TextInput type='password' id='password-id' name='password' placeholder='Password' size='small' required />
                     </FormField>
                     
-                    <Box direction='row' justify='center' gap='medium'>
+                    <Box direction='row' margin={{top: '15px'}} justify='center' gap='medium'>
                         <Button type='reset' color='white' label='Reset' />
                         <Button color='white' primary type='submit' label='Signin' />
                     </Box>
