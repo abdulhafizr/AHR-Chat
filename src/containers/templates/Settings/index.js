@@ -11,14 +11,14 @@ const Settings = ({ size, toggleIsSettingShow }) => {
             background='light-2'
             align='center'
         >
-            <AppBar>
-            <Heading level='4' margin='none'>Setting</Heading>
-            <Button 
-                size='small' 
-                padding='none' 
-                icon={<FormClose size='small' />} 
-                onClick={toggleIsSettingShow}
-            ></Button>
+            <AppBar style={{paddingTop: '15px', paddingBottom: '15px'}}>
+                <Button 
+                    size='small' 
+                    padding='none' 
+                    icon={<FormClose size='small' />} 
+                    onClick={toggleIsSettingShow}
+                ></Button>
+                <Heading level='5' style={{fontWeight: 'normal'}} margin='none'>Setting</Heading>
             </AppBar>
 
             <Box flex justify='center'>
