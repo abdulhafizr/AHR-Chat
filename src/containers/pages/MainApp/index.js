@@ -1,12 +1,17 @@
 import React from 'react';
 import { ChatBody, Contacts, DetailContactAndroid, DetailContactWeb, Settings } from '../../templates';
 import { Provider } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { store } from '../../../config/redux';
 import { Box, Grommet, ResponsiveContext } from "grommet";
 import { connect } from 'react-redux';
 import theme from './theme';
 
-const MainApp = ({ isSettingShow, isDetailShow }) => {
+const MainApp = ({ isSettingShow, isDetailShow, isSignin }) => {
+  const history = useHistory();
+  (isSignin === 'not-signin') && (
+    history.push('/signin')
+  )
   return (
     <Provider store={store}>
       <Grommet theme={theme} full>
@@ -55,6 +60,8 @@ const MainApp = ({ isSettingShow, isDetailShow }) => {
 }
 
 const reduxState = (state) => ({
+  isSignin: state.isSignin,
+  user: state.user,
   isSettingShow: state.isSettingShow,
   isDetailShow: state.isDetailShow,
 })

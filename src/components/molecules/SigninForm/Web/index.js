@@ -13,6 +13,7 @@ const Web = ({ isValidationError, isLoading, isSignin, toggleIsValidationError, 
             history.push('/');
         }
     }
+    console.log(isSignin);
     return (
         <Box flex fill
             align='center' 
@@ -67,7 +68,7 @@ const Web = ({ isValidationError, isLoading, isSignin, toggleIsValidationError, 
 const reduxState = (state) => ({
     isValidationError: state.isValidationError,
     isLoading: state.isLoading,
-    isSignin: state.isSingin,
+    isSignin: state.isSignin,
     messageValidationError: state.messageValidationError,
 })
 const reduxDispatch = (dispatch) => ({

@@ -67,7 +67,7 @@ const Mobile = ({ isValidationError, isLoading, isSignin, toggleIsValidationErro
 const reduxState = (state) => ({
     isValidationError: state.isValidationError,
     isLoading: state.isLoading,
-    isSignin: state.isSingin,
+    isSignin: state.isSignin,
     messageValidationError: state.messageValidationError,
 })
 const reduxDispatch = (dispatch) => ({

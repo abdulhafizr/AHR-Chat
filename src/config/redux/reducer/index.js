@@ -3,7 +3,7 @@ const initState = {
     messageValidationError: '',
     isLoading: false,
     isSignup: '',
-    isSingin: '',
+    isSignin: 'not-signin',
     isSettingShow: false,
     isDetailShow: false,
     user: {},
@@ -37,7 +37,7 @@ const reducer = (state = initState, action) => {
     if(action.type === 'changeIsSignin'){
         return {
             ...state,
-            isSingin: action.value
+            isSignin: action.value
         }
     }
     if(action.type === 'initialUser'){
