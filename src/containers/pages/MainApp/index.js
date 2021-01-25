@@ -34,17 +34,12 @@ const MainApp = ({ isSettingShow, isDetailShow }) => {
                       <ChatBody />
                     )
                   }
-                  
+
+                  <DetailContactWeb size={size} />
+
                   {
-                    isDetailShow && 
-                    (
-                      size !== 'small' ? 
-                      (
-                        <DetailContactWeb />
-                      ) :
-                      (
-                        <DetailContactAndroid /> 
-                      )
+                    isDetailShow && (
+                      <DetailContactAndroid size={size} /> 
                     )
                   }
 

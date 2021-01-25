@@ -3,9 +3,9 @@ import { AppBar } from '../../../components';
 import { FormClose } from 'grommet-icons';
 import { connect } from 'react-redux';
 
-const DetailContactWeb = ({ isDetailShow, toggleIsDetailShow }) => {
+const DetailContactWeb = ({ isDetailShow, toggleIsDetailShow, size }) => {
     return (
-        <Collapsible direction='horizontal' open={isDetailShow}>
+        <Collapsible direction='horizontal' open={(isDetailShow && size !== 'small')}>
             <Box
                 flex
                 width='medium'

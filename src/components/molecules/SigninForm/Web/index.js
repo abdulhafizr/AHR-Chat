@@ -26,7 +26,6 @@ const Web = (props) => {
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
-                        <Button color='white' label='Change User' onClick={props.toggleIsValidationError} />
                         <Button color='white' primary type='submit' label='Signin' />
                     </Box>
                     <Box margin={{top: '6px'}}>
