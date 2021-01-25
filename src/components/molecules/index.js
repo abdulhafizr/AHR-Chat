@@ -1,3 +1,6 @@
 import AppBar from './AppBar';
+import ValidationError from './ValidationError';
+import SignupFail from './SignupFail';
+import SignupSuccess from './SignupSuccess';
 
-export { AppBar };
+export { AppBar, ValidationError, SignupFail, SignupSuccess };

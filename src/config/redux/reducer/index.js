@@ -1,5 +1,7 @@
 const initState = {
     isValidationError: false,
+    isLoading: false,
+    isSignup: '',
     isSettingShow: false,
     isDetailShow: false,
     user: 'Abdul',
@@ -10,6 +12,18 @@ const reducer = (state = initState, action) => {
         return {
             ...state,
             isValidationError: !state.isValidationError
+        }
+    }
+    if(action.type === 'toggleIsLoading'){
+        return {
+            ...state,
+            isLoading: !state.isLoading
+        }
+    }
+    if(action.type === 'changeIsSignup'){
+        return {
+            ...state,
+            isSignup: action.value
         }
     }
     if(action.type === 'changeUser'){

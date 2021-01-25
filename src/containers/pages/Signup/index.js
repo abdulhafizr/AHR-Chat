@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from '../../../config/redux';
 import theme from './theme';
 
-const Signup = ({ isValidationError }) => {
-    console.log(isValidationError)
+const Signup = () => {
     return (
         <Provider store={store}>
             <Grommet theme={theme} full>

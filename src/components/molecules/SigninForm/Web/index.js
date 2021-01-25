@@ -2,7 +2,7 @@ import { Box, Button, Form, FormField, Heading, Layer, Text, TextInput } from "g
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-const Web = ({ isValidationError, toggleIsValidationError }) => {
+const Web = ({ isValidationError, isLoading, toggleIsLoading, toggleIsValidationError }) => {
     return (
         <Box flex fill
             align='center' 
@@ -15,7 +15,7 @@ const Web = ({ isValidationError, toggleIsValidationError }) => {
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
                 <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN</Heading>
 
-                <Form onSubmit={({value}) => console.log(value)}>
+                <Form onSubmit={({value}) => null}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
@@ -26,7 +26,15 @@ const Web = ({ isValidationError, toggleIsValidationError }) => {
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
                         <Button color='white' primary onClick={toggleIsValidationError} label='Error' />
-                        <Button color='white' primary type='submit' label='Signin' />
+                        {
+                            isLoading ? 
+                            (
+                                <Button color='white' disabled primary label='Loading..' />
+                            ) :
+                            (
+                                <Button color='white' primary type='submit' onClick={toggleIsLoading} label='Signin' />
+                            )
+                        }
                     </Box>
                     <Box margin={{top: '6px'}}>
                         <Text margin='xsmall' size='xsmall'>Dont have an account? <Link to='/signup'>Signup</Link></Text>
@@ -50,11 +58,20 @@ const Web = ({ isValidationError, toggleIsValidationError }) => {
     )
 }
 
+const simulationLoading = () => (dispatch) => {
+    dispatch({type: 'toggleIsLoading'})
+    setTimeout(() => {
+        dispatch({type: 'toggleIsLoading'})
+    }, 3000)
+}
+
 const reduxState = (state) => ({
-    isValidationError: state.isValidationError
+    isValidationError: state.isValidationError,
+    isLoading: state.isLoading,
 })
 const reduxDispatch = (dispatch) => ({
-    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'})
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),
+    toggleIsLoading: () => dispatch(simulationLoading())
 })
 
 export default connect(reduxState, reduxDispatch) (Web);
