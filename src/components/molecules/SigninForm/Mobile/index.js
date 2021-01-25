@@ -1,7 +1,18 @@
 import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
-import { Link } from "react-router-dom";
+import { Refresh } from "grommet-icons";
+import { connect } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
+import { SignFail, ValidationError } from "../..";
+import signinUser from "../../../../config/signinUser";
 
-const Mobile = () => {
+const Mobile = ({ isValidationError, isLoading, isSignin, toggleIsValidationError, signinUser, messageValidationError, toggleIsSignin }) => {
+    const history = useHistory();
+    const signinNewUser = async (data) => {
+        const result = await signinUser(data).catch((error) => error);
+        if(result) {
+            history.push('/');
+        }
+    }
     return (
         <Box flex fill
             align='center' 
@@ -10,10 +21,9 @@ const Mobile = () => {
             justify='center'
         >   
             <Box width='medium' style={{borderRadius: '6px'}} pad='small' margin={{horizontal: '15px'}} background='brand' elevation='small'>
-                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNIN AHR-Chat
-</Heading>
+                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNIN AHR-Chat</Heading>
 
-                <Form onSubmit={({value}) => {console.log(value)}}>
+                <Form onSubmit={({value}) => {signinNewUser(value)}}>
                     
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
@@ -23,8 +33,16 @@ const Mobile = () => {
                     </FormField>
                     
                     <Box direction='row' margin={{top: '15px'}} justify='center' gap='medium'>
-                        <Button type='reset' color='white' label='Reset' />
-                        <Button color='white' primary type='submit' label='Signin' />
+                    <Button type='reset' color='white' label='Reset' />
+                        {
+                            isLoading ? 
+                            (
+                                <Button color='white' icon={<Refresh size='small' />} primary disabled label='Loading...' />
+                            ) :
+                            (
+                                <Button color='white' primary type='submit' label='Signin' />
+                            )
+                        }
                     </Box>
                     <Box margin={{top: '6px'}}>
                         <Text margin='xsmall' size='xsmall'>Dont have an account? <Link to='/signup'>Signu</Link></Text>
@@ -32,8 +50,30 @@ const Mobile = () => {
                 </Form>
 
             </Box>
+            {
+                isSignin === 'failed' && (
+                    <SignFail toggleNotif={toggleIsSignin} title='Signin Failed' message={messageValidationError} />
+                )
+            }
+            {
+                isValidationError && (
+                    <ValidationError toggleIsValidationError={toggleIsValidationError} />
+                )
+            }
         </Box>
     )
 }
 
-export default Mobile;
+const reduxState = (state) => ({
+    isValidationError: state.isValidationError,
+    isLoading: state.isLoading,
+    isSignin: state.isSingin,
+    messageValidationError: state.messageValidationError,
+})
+const reduxDispatch = (dispatch) => ({
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),
+    signinUser: (data) => dispatch(signinUser(data)),
+    toggleIsSignin: () => dispatch({type: 'changeIsSignin', value: ''})
+})
+
+export default connect(reduxState, reduxDispatch) (Mobile);
