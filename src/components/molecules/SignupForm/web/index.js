@@ -2,7 +2,7 @@ import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet"
 import { Refresh } from "grommet-icons";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import { SignupFail, SignupSuccess, ValidationError } from "../..";
+import { SignFail, SignupSuccess, ValidationError } from "../..";
 import signupUser from '../../../../config/signupUser';
 
 const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading, isSignup, toggleIsSignup, messageValidationError }) => {
@@ -16,7 +16,7 @@ const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading
             <Box width='large' />
             
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP</Heading>
+                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNUP AHR-Chat</Heading>
 
                 <Form onSubmit={({value}) => signupUser(value)}>
                     
@@ -60,7 +60,7 @@ const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading
             }
             {
                 isSignup === 'failed' && (
-                    <SignupFail message={messageValidationError} toggleIsSignup={toggleIsSignup} />
+                    <SignFail title="Signup Failed" message={messageValidationError} toggleNotif={toggleIsSignup} />
                 )
             }
         </Box>

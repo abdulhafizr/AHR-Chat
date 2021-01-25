@@ -10,7 +10,8 @@ const Mobile = () => {
             justify='center'
         >   
             <Box width='medium' style={{borderRadius: '6px'}} pad='small' margin={{horizontal: '15px'}} background='brand' elevation='small'>
-                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNIN</Heading>
+                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNIN AHR-Chat
+</Heading>
 
                 <Form onSubmit={({value}) => {console.log(value)}}>
                     

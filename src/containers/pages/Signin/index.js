@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from '../../../config/redux';
 import theme from './theme';
 
-const Signin = (props) => {
+const Signin = () => {
     return (
         <Provider store={store}>
             <Grommet theme={theme} full>

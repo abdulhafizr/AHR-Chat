@@ -2,7 +2,7 @@ import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet"
 import { connect } from 'react-redux';
 import signupUser from '../../../../config/signupUser';
 import { Link } from "react-router-dom";
-import { SignupFail, SignupSuccess, ValidationError } from "../..";
+import { SignFail, SignupSuccess, ValidationError } from "../..";
 import { Refresh } from "grommet-icons";
 
 const Mobile = ({ isValidationError, toggleIsValidationError, signupUser, isLoading, isSignup, toggleIsSignup, messageValidationError }) => {
@@ -14,7 +14,7 @@ const Mobile = ({ isValidationError, toggleIsValidationError, signupUser, isLoad
             justify='center'
         >   
             <Box width='medium' style={{borderRadius: '6px'}} pad='small' margin={{horizontal: '15px'}} background='brand' elevation='small'>
-                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNUP</Heading>
+                <Heading level='2' margin='small' style={{fontWeight: 'normal'}} responsive alignSelf='center'>SIGNUP AHR-Chat</Heading>
 
                 <Form onSubmit={({value}) => signupUser(value)}>
                     
@@ -58,7 +58,7 @@ const Mobile = ({ isValidationError, toggleIsValidationError, signupUser, isLoad
             }
             {
                 isSignup === 'failed' && (
-                    <SignupFail message={messageValidationError} toggleIsSignup={toggleIsSignup} />
+                    <SignFail title="Signup Failed" message={messageValidationError} toggleIsSignup={toggleIsSignup} />
                 )
             }
         </Box>

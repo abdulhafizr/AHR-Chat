@@ -1,8 +1,18 @@
-import { Box, Button, Form, FormField, Heading, Layer, Text, TextInput } from "grommet";
+import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
+import { Refresh } from "grommet-icons";
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { SignFail, ValidationError } from "../..";
+import signinUser from "../../../../config/signinUser";
 
-const Web = ({ isValidationError, isLoading, toggleIsLoading, toggleIsValidationError }) => {
+const Web = ({ isValidationError, isLoading, isSignin, toggleIsValidationError, signinUser, messageValidationError, toggleIsSignin }) => {
+    const history = useHistory();
+    const signinNewUser = async (data) => {
+        const result = await signinUser(data).catch((error) => error);
+        if(result) {
+            history.push('/');
+        }
+    }
     return (
         <Box flex fill
             align='center' 
@@ -13,9 +23,9 @@ const Web = ({ isValidationError, isLoading, toggleIsLoading, toggleIsValidation
             <Box width='large' />
             
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN</Heading>
+                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN AHR-Chat</Heading>
 
-                <Form onSubmit={({value}) => null}>
+                <Form onSubmit={({value}) => signinNewUser(value)}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
                         <TextInput type='email' id='email-id' name='email' placeholder='Email' size='small' required />
                     </FormField>
@@ -25,14 +35,13 @@ const Web = ({ isValidationError, isLoading, toggleIsLoading, toggleIsValidation
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
-                        <Button color='white' primary onClick={toggleIsValidationError} label='Error' />
                         {
                             isLoading ? 
                             (
-                                <Button color='white' disabled primary label='Loading..' />
+                                <Button color='white' icon={<Refresh size='small' />} primary disabled label='Loading...' />
                             ) :
                             (
-                                <Button color='white' primary type='submit' onClick={toggleIsLoading} label='Signin' />
+                                <Button color='white' primary type='submit' label='Signin' />
                             )
                         }
                     </Box>
@@ -42,36 +51,29 @@ const Web = ({ isValidationError, isLoading, toggleIsLoading, toggleIsValidation
                 </Form>
             </Box>
             {
+                isSignin === 'failed' && (
+                    <SignFail toggleNotif={toggleIsSignin} title='Signin Failed' message={messageValidationError} />
+                )
+            }
+            {
                 isValidationError && (
-                    <Layer full 
-                        margin={{top: '120px', right: '120px', bottom: '120px', left: '120px'}}
-                        onEsc={toggleIsValidationError}
-                        onClickOutside={toggleIsValidationError}
-                    >
-                        <Box fill justify='center' align='center' size='large' background='light-2'>
-                            <Text>Validation Error</Text>
-                        </Box>
-                    </Layer>
+                    <ValidationError toggleIsValidationError={toggleIsValidationError} />
                 )
             }
         </Box>
     )
 }
 
-const simulationLoading = () => (dispatch) => {
-    dispatch({type: 'toggleIsLoading'})
-    setTimeout(() => {
-        dispatch({type: 'toggleIsLoading'})
-    }, 3000)
-}
-
 const reduxState = (state) => ({
     isValidationError: state.isValidationError,
     isLoading: state.isLoading,
+    isSignin: state.isSingin,
+    messageValidationError: state.messageValidationError,
 })
 const reduxDispatch = (dispatch) => ({
     toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),
-    toggleIsLoading: () => dispatch(simulationLoading())
+    signinUser: (data) => dispatch(signinUser(data)),
+    toggleIsSignin: () => dispatch({type: 'changeIsSignin', value: ''})
 })
 
 export default connect(reduxState, reduxDispatch) (Web);

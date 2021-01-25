@@ -3,9 +3,10 @@ const initState = {
     messageValidationError: '',
     isLoading: false,
     isSignup: '',
+    isSingin: '',
     isSettingShow: false,
     isDetailShow: false,
-    user: 'Abdul',
+    user: {},
 }
 
 const reducer = (state = initState, action) => {
@@ -33,10 +34,16 @@ const reducer = (state = initState, action) => {
             isSignup: action.value
         }
     }
-    if(action.type === 'changeUser'){
+    if(action.type === 'changeIsSignin'){
         return {
             ...state,
-            user: 'Abdul Hafiz Ramadan'
+            isSingin: action.value
+        }
+    }
+    if(action.type === 'initialUser'){
+        return {
+            ...state,
+            user: action.value
         }
     }
     if(action.type === 'toggleIsSettingShow'){
