@@ -32,7 +32,6 @@ const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
-                        <Button color='white' primary onClick={toggleIsValidationError} label='Error' />
                         {
                             isLoading ? 
                             (

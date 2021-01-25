@@ -1,4 +1,5 @@
-import { Box, Layer, Text } from "grommet";
+import { Box, Button, Layer, Text } from "grommet";
+import { Close } from "grommet-icons";
 
 const ValidationError = ({ toggleIsValidationError }) => {
     return (
@@ -7,8 +8,13 @@ const ValidationError = ({ toggleIsValidationError }) => {
             onEsc={toggleIsValidationError}
             onClickOutside={toggleIsValidationError}
         >
-            <Box fill justify='center' align='center' size='large' background='light-2'>
+            <Box fill justify='around' align='center' size='large' background='brand'>
                 <Text>Validation Error</Text>
+                    <Box direction='row' align='center' gap='medium'>
+                        <Close size='xlarge' />
+                        <Text>Password Must be Greater than 6 Character</Text>
+                    </Box>
+                <Button secondary color='white' onClick={toggleIsValidationError} label='Back' />
             </Box>
         </Layer>
     )

@@ -1,4 +1,5 @@
-import { Box, Layer, Text } from "grommet"
+import { Box, Button, Layer, Text } from "grommet"
+import { StatusGood } from "grommet-icons"
 
 const SignupSuccess = ({ toggleIsSignup }) => {
     return (
@@ -7,8 +8,13 @@ const SignupSuccess = ({ toggleIsSignup }) => {
             onEsc={toggleIsSignup}
             onClickOutside={toggleIsSignup}
         >
-            <Box fill justify='center' align='center' size='large' background='light-2'>
-                <Text>Signup Success!</Text>
+            <Box fill justify='around' align='center' background='brand'>
+                <Text size='xlarge'>Signup Success</Text>
+                <Box direction='row' align='center' gap='medium'>
+                    <StatusGood size='xlarge' />
+                    <Text>Congratulations, Account has been Successfully Registered</Text>
+                </Box>
+                <Button secondary onClick={toggleIsSignup} color='white' white label='Back' />
             </Box>
         </Layer>
     )

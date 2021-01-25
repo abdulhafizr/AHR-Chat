@@ -1,4 +1,5 @@
-import { Box, Layer, Text } from "grommet"
+import { Box, Button, Layer, Text } from "grommet"
+import { Close } from "grommet-icons";
 
 const SignupFail = ({ toggleIsSignup }) => {
     return (
@@ -7,8 +8,13 @@ const SignupFail = ({ toggleIsSignup }) => {
             onEsc={toggleIsSignup}
             onClickOutside={toggleIsSignup}
         >
-            <Box fill justify='center' align='center' size='large' background='light-2'>
-                <Text>Signup Failed!</Text>
+            <Box fill justify='around' align='center' background='brand'>
+                <Text size='xlarge'>Signup Failed</Text>
+                <Box direction='row' align='center' gap='medium'>
+                    <Close size='xlarge' />
+                    <Text>Sorry, Account has been Failed to Registered</Text>
+                </Box>
+                <Button secondary onClick={toggleIsSignup} color='white' white label='Back' />
             </Box>
         </Layer>
     )

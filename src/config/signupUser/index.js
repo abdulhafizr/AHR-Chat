@@ -1,7 +1,13 @@
 import firebase from '../firebaseConfig';
 
 const signupUser = ({email, password}) => (dispatch) => {
-    dispatch({type: 'toggleIsLoading'});    
+    
+    if([...password].length <= 5){
+        return dispatch({type: 'toggleIsValidationError'})
+    }
+    
+
+    dispatch({type: 'toggleIsLoading'});
     
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
