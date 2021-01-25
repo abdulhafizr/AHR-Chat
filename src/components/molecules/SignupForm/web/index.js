@@ -1,11 +1,11 @@
-import { Box, Button, Form, FormField, Heading, Layer, Text, TextInput } from "grommet";
+import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
 import { Refresh } from "grommet-icons";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { SignupFail, SignupSuccess, ValidationError } from "../..";
 import signupUser from '../../../../config/signupUser';
 
-const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading, isSignup, toggleIsSignup }) => {
+const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading, isSignup, toggleIsSignup, messageValidationError }) => {
     return (
         <Box flex fill
             align='center' 
@@ -60,7 +60,7 @@ const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading
             }
             {
                 isSignup === 'failed' && (
-                    <SignupFail toggleIsSignup={toggleIsSignup} />
+                    <SignupFail message={messageValidationError} toggleIsSignup={toggleIsSignup} />
                 )
             }
         </Box>
@@ -70,7 +70,8 @@ const Web = ({ isValidationError, toggleIsValidationError, signupUser, isLoading
 const reduxState = (state) => ({
     isValidationError: state.isValidationError,
     isLoading: state.isLoading,
-    isSignup: state.isSignup
+    isSignup: state.isSignup,
+    messageValidationError: state.messageValidationError,
 })
 const reduxDispatch = (dispatch) => ({
     toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),

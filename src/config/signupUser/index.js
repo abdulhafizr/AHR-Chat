@@ -21,6 +21,7 @@ const signupUser = ({email, password}) => (dispatch) => {
             console.log(errorMessage);
             dispatch({type: 'toggleIsLoading'});
             dispatch({type: 'changeIsSignup', value: 'failed'});
+            dispatch({type: 'changeMessageValidationError', value: errorMessage});
         });
 } 
 

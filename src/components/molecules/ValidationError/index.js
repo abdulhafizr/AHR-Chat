@@ -4,7 +4,7 @@ import { Close } from "grommet-icons";
 const ValidationError = ({ toggleIsValidationError }) => {
     return (
         <Layer full 
-            margin={{top: '120px', right: '120px', bottom: '120px', left: '120px'}}
+            margin={{top: '120px', right: '240px', bottom: '120px', left: '240px'}}
             onEsc={toggleIsValidationError}
             onClickOutside={toggleIsValidationError}
         >

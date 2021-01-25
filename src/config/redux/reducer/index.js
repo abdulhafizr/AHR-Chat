@@ -1,5 +1,6 @@
 const initState = {
     isValidationError: false,
+    messageValidationError: '',
     isLoading: false,
     isSignup: '',
     isSettingShow: false,
@@ -12,6 +13,12 @@ const reducer = (state = initState, action) => {
         return {
             ...state,
             isValidationError: !state.isValidationError
+        }
+    }
+    if(action.type === 'changeMessageValidationError'){
+        return {
+            ...state,
+            messageValidationError: action.value
         }
     }
     if(action.type === 'toggleIsLoading'){
