@@ -1,7 +1,9 @@
 import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
+import { connect } from 'react-redux';
+import signupUser from '../../../../config/signupUser';
 import { Link } from "react-router-dom";
 
-const Mobile = ({ signupUser }) => {
+const Mobile = ({ isValidationError }) => {
     return (
         <Box flex fill
             align='center' 
@@ -38,4 +40,11 @@ const Mobile = ({ signupUser }) => {
     )
 }
 
-export default Mobile;
+const reduxState = (state) => ({
+    isValidationError: state.isValidationError
+})
+const reduxDispatch = (dispatch) => ({
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'})
+})
+
+export default connect(reduxState, reduxDispatch) (Mobile);

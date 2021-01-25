@@ -1,9 +1,8 @@
-import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet";
+import { Box, Button, Form, FormField, Heading, Layer, Text, TextInput } from "grommet";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-const Web = (props) => {
-    console.log(props.isValidationError)
+const Web = ({ isValidationError, toggleIsValidationError }) => {
     return (
         <Box flex fill
             align='center' 
@@ -14,7 +13,7 @@ const Web = (props) => {
             <Box width='large' />
             
             <Box width={{min: '420px', max: '450px'}} style={{borderRadius: '6px'}} pad='small' background='brand' elevation='small'>
-                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN {props.user}</Heading>
+                <Heading level='4' margin='small' responsive alignSelf='center'>SIGNIN</Heading>
 
                 <Form onSubmit={({value}) => console.log(value)}>
                     <FormField name='email' htmlFor='email-id' label='Email'>
@@ -26,6 +25,7 @@ const Web = (props) => {
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
+                        <Button color='white' primary onClick={toggleIsValidationError} label='Error' />
                         <Button color='white' primary type='submit' label='Signin' />
                     </Box>
                     <Box margin={{top: '6px'}}>
@@ -33,24 +33,28 @@ const Web = (props) => {
                     </Box>
                 </Form>
             </Box>
+            {
+                isValidationError && (
+                    <Layer full 
+                        margin={{top: '120px', right: '120px', bottom: '120px', left: '120px'}}
+                        onEsc={toggleIsValidationError}
+                        onClickOutside={toggleIsValidationError}
+                    >
+                        <Box fill justify='center' align='center' size='large' background='light-2'>
+                            <Text>Validation Error</Text>
+                        </Box>
+                    </Layer>
+                )
+            }
         </Box>
     )
 }
 
 const reduxState = (state) => ({
-    isValidationError: state.isValidationError,
-    user: state.user
+    isValidationError: state.isValidationError
 })
-
-const asyncChangeUser = () => (dispatch) => {
-    setTimeout(() => {
-        return dispatch({type: 'changeUser'});
-    }, 2000)
-}
-
 const reduxDispatch = (dispatch) => ({
-    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'}),
-    changeUser: () => dispatch(asyncChangeUser())
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'})
 })
 
 export default connect(reduxState, reduxDispatch) (Web);

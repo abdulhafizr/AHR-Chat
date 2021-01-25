@@ -1,30 +1,29 @@
 import { Grommet, ResponsiveContext } from 'grommet';
 import { Mobile, Web } from '../../../components/molecules/SignupForm';
-import { connect } from 'react-redux';
-import signupUser from '../../../config/signupUser';
+import { Provider } from 'react-redux';
+import { store } from '../../../config/redux';
 import theme from './theme';
 
-const Signup = () => {
+const Signup = ({ isValidationError }) => {
+    console.log(isValidationError)
     return (
-        <Grommet theme={theme} full>
-            <ResponsiveContext.Consumer>
-                {  (size) => (
-                        (size === 'medium' || size === 'large') ? 
-                        (
-                            <Web signupUser={(value) => signupUser(value)} />
-                        ) :
-                        (
-                            <Mobile signupUser={(value) => signupUser(value)} />
+        <Provider store={store}>
+            <Grommet theme={theme} full>
+                <ResponsiveContext.Consumer>
+                    {  (size) => (
+                            (size === 'medium' || size === 'large') ? 
+                            (
+                                <Web />
+                            ) :
+                            (
+                                <Mobile />
+                            )
                         )
-                    )
-                }
-            </ResponsiveContext.Consumer>
-        </Grommet>
+                    }
+                </ResponsiveContext.Consumer>
+            </Grommet>
+        </Provider>
     )
 }
 
-const dispatchStateToProps = (state) => ({
-    isValidationError: state.isValidationError
-})
-
-export default connect(dispatchStateToProps, null) (Signup);
+export default Signup;

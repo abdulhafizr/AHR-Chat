@@ -1,7 +1,9 @@
-import { Box, Button, Form, FormField, Heading, Text, TextInput } from "grommet"
+import { Box, Button, Form, FormField, Heading, Layer, Text, TextInput } from "grommet";
+import signupUser from '../../../../config/signupUser';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
-const Web = ({ signupUser }) => {
+const Web = ({ isValidationError, toggleIsValidationError }) => {
     return (
         <Box flex fill
             align='center' 
@@ -28,6 +30,7 @@ const Web = ({ signupUser }) => {
                     
                     <Box direction='row' gap='small'>
                         <Button type='reset' color='white' label='Reset' />
+                        <Button color='white' primary onClick={toggleIsValidationError} label='Error' />
                         <Button color='white' primary type='submit' label='Signup' />
                     </Box>
                     <Box margin={{top: '6px'}}>
@@ -36,8 +39,28 @@ const Web = ({ signupUser }) => {
                 </Form>
 
             </Box>
+            {
+                isValidationError && (
+                    <Layer full 
+                        margin={{top: '120px', right: '120px', bottom: '120px', left: '120px'}}
+                        onEsc={toggleIsValidationError}
+                        onClickOutside={toggleIsValidationError}
+                    >
+                        <Box fill justify='center' align='center' size='large' background='light-2'>
+                            <Text>Validation Error</Text>
+                        </Box>
+                    </Layer>
+                )
+            }
         </Box>
     )
 }
 
-export default Web;
+const reduxState = (state) => ({
+    isValidationError: state.isValidationError
+})
+const reduxDispatch = (dispatch) => ({
+    toggleIsValidationError: () => dispatch({type: 'toggleIsValidationError'})
+})
+
+export default connect(reduxState, reduxDispatch) (Web);
