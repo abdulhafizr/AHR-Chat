@@ -22,6 +22,7 @@ const signinUser = ({ email, password }) => (dispatch) => {
                     phoneNumber,
                     photoURL
                 }})
+                dispatch({type: 'initAuthKey', value: uid});
                 resolve(true);
             })
             .catch((error) => {

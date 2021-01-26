@@ -7,11 +7,16 @@ import { Box, Grommet, ResponsiveContext } from "grommet";
 import { connect } from 'react-redux';
 import theme from './theme';
 
-const MainApp = ({ isSettingShow, isDetailShow, isSignin }) => {
+const MainApp = ({ isSettingShow, isDetailShow, isSignin, authKey, user }) => {
   const history = useHistory();
-  (isSignin === 'not-signin') && (
+  
+  if(!user.uid) {
     history.push('/signin')
-  )
+  }
+  if(isSignin === 'not-signin' || authKey !== user.uid){
+    history.push('/signin')
+  }
+
   return (
     <Provider store={store}>
       <Grommet theme={theme} full>
@@ -60,6 +65,7 @@ const MainApp = ({ isSettingShow, isDetailShow, isSignin }) => {
 }
 
 const reduxState = (state) => ({
+  authKey: state.authKey,
   isSignin: state.isSignin,
   user: state.user,
   isSettingShow: state.isSettingShow,

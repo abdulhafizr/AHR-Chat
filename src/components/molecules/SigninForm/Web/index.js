@@ -13,7 +13,6 @@ const Web = ({ isValidationError, isLoading, isSignin, toggleIsValidationError, 
             history.push('/');
         }
     }
-    console.log(isSignin);
     return (
         <Box flex fill
             align='center' 

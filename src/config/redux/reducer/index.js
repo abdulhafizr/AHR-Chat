@@ -4,9 +4,10 @@ const initState = {
     isLoading: false,
     isSignup: '',
     isSignin: 'not-signin',
+    authKey: '123',
     isSettingShow: false,
     isDetailShow: false,
-    user: {},
+    user: {uid: '123'},
 }
 
 const reducer = (state = initState, action) => {
@@ -38,6 +39,12 @@ const reducer = (state = initState, action) => {
         return {
             ...state,
             isSignin: action.value
+        }
+    }
+    if(action.type === 'initAuthKey'){
+        return {
+            ...state,
+            authKey: action.value
         }
     }
     if(action.type === 'initialUser'){
